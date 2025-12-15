@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://email-roaster.vercel.app/sitemap.xml
