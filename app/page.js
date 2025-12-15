@@ -1,11 +1,12 @@
 
 "use client";
 import { useState } from 'react';
-import { Flame, Mail, Send, AlertTriangle, CheckCircle, RefreshCw } from 'lucide-react';
+import { Flame, Mail, Send, AlertTriangle, CheckCircle, RefreshCw, HelpCircle, X } from 'lucide-react';
 import './globals.css';
 
 export default function Home() {
     const [step, setStep] = useState('input');
+    const [showHelp, setShowHelp] = useState(false);
     const [subject, setSubject] = useState('');
     const [body, setBody] = useState('');
     const [email, setEmail] = useState('');
@@ -160,6 +161,48 @@ export default function Home() {
                 </div>
             )}
 
+            {/* Help Button */}
+            <button
+                onClick={() => setShowHelp(true)}
+                className="fixed top-4 right-4 text-slate-400 hover:text-white transition"
+            >
+                <HelpCircle size={24} />
+            </button>
+
+            {/* Help Modal */}
+            {showHelp && (
+                <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+                    <div className="bg-zinc-900 ring-1 ring-red-900 p-6 rounded-xl max-w-sm w-full relative">
+                        <button
+                            onClick={() => setShowHelp(false)}
+                            className="absolute top-4 right-4 text-slate-400 hover:text-white"
+                        >
+                            <X size={24} />
+                        </button>
+
+                        <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                            <Flame size={24} className="text-red-500" /> How it Works
+                        </h3>
+
+                        <div className="space-y-4">
+                            <div className="flex gap-4">
+                                <div className="bg-black border border-red-900 w-8 h-8 rounded-full flex items-center justify-center font-bold text-red-500 shrink-0">1</div>
+                                <div><strong className="text-white block">Paste Draft</strong><p className="text-slate-400 text-sm">Enter your raw cold email Subject & Body.</p></div>
+                            </div>
+                            <div className="flex gap-4">
+                                <div className="bg-black border border-red-900 w-8 h-8 rounded-full flex items-center justify-center font-bold text-red-500 shrink-0">2</div>
+                                <div><strong className="text-white block">Get Roasted</strong><p className="text-slate-400 text-sm">AI rates it on Spam, Ego & Impact.</p></div>
+                            </div>
+                            <div className="flex gap-4">
+                                <div className="bg-black border border-red-900 w-8 h-8 rounded-full flex items-center justify-center font-bold text-red-500 shrink-0">3</div>
+                                <div><strong className="text-white block">Unlock Fix</strong><p className="text-slate-400 text-sm">Get a rewritten, high-converting version.</p></div>
+                            </div>
+                        </div>
+
+                        <button onClick={() => setShowHelp(false)} className="bg-red-600 hover:bg-red-500 text-white font-bold py-2 rounded mt-6 w-full">Got it</button>
+                    </div>
+                </div>
+            )}
         </main>
     );
 }
